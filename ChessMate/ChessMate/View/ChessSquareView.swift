@@ -16,7 +16,9 @@ struct ChessSquareView: View {
             Rectangle()
                 .fill((position.row + position.column) % 2 == 0 ? Color.white : Color.gray)
                 .overlay(gameViewModel.selectedPosition == position
-                         ? Rectangle().fill(Color.blue.opacity(0.4)) : nil )
+                         ? Rectangle().fill(Color.blue.opacity(0.4)) :
+                            gameViewModel.kingInCheckPosition == position
+                         ? Rectangle().fill(Color.red.opacity(0.4)) : nil)
                 .frame(width: 50, height: 50)
 
             if let piece = gameViewModel.getPiece(at: position) {

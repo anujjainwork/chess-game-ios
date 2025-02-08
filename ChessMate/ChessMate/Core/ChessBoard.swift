@@ -63,7 +63,6 @@ struct ChessBoard {
         let toIndex = to.row * 8 + to.column
         
         guard let movingPiece = board[fromIndex].chessPiece else {
-            print("no piece at \(from.row) \(from.column) to move! ")
             return false
         }
         
@@ -75,10 +74,8 @@ struct ChessBoard {
         if isValidMove(from: from, to: to, movingPiece: movingPiece, board: self){
             board[toIndex].chessPiece = movingPiece
             board[fromIndex].chessPiece = nil
-            print("Moved \(movingPiece.rank) from \(from.row), \(from.column) to \(to.row), \(to.column)")
             return true
         }
-        print("illegal move")
         return false
     }
 
