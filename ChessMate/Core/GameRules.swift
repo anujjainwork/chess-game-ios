@@ -21,34 +21,27 @@ func isKingInCheck(from: Position, to: Position, movingPiece: ChessPiece, board:
 /// Checks if the current move resolves check or not.
 func doesResolveCheck(from: Position, to: Position, movingPiece: ChessPiece, board: ChessBoard, whiteKingPosition: Position, blackKingPosition: Position) -> Bool {
     
-    // Create a deep copy of the board
     var tempBoard = board.copy()
     
-    // Backup original state
     let backupFromPiece = tempBoard.getPiece(at: from)
-    let backupToPiece = tempBoard.getPiece(at: to)  // Might be nil if empty
+    let backupToPiece = tempBoard.getPiece(at: to)
     
-    // Track original king position
     var currentKingPosition = (movingPiece.player == .white) ? whiteKingPosition : blackKingPosition
     var updatedKingPosition = currentKingPosition
 
-    // Simulate the move
-    tempBoard.setPiece(at: from, piece: nil)  // Remove moving piece from original position
-    tempBoard.setPiece(at: to, piece: movingPiece)  // Place piece in new position
+    tempBoard.setPiece(at: from, piece: nil)
+    tempBoard.setPiece(at: to, piece: movingPiece)
     
-    // Update king's position if it's the moving piece
     if movingPiece.rank == .king {
         updatedKingPosition = to
     }
 
-    // Check if king is still in check
     let stillInCheck = isKingStillInCheck(for: movingPiece.player, board: tempBoard, kingPosition: updatedKingPosition)
 
-    // Restore the board state (Undo move)
     tempBoard.setPiece(at: from, piece: backupFromPiece)
     tempBoard.setPiece(at: to, piece: backupToPiece)
 
-    return !stillInCheck  // If the king is no longer in check, move resolves check
+    return !stillInCheck
 }
 
 
@@ -104,4 +97,22 @@ func isKingStillInCheck(for player: PlayerType, board: ChessBoard, kingPosition:
     }
     
     return false
+}
+
+/// Returns all the valid moves in a list
+func getAllValidMovesToHighlight(at from: Position, chessBoard: ChessBoard, kingInCheckPosition: Position?, whiteKingPosition: Position, blackKingPosition: Position) -> [Position] {
+    var validMovesList: [Position] = []
+    for cell in chessBoard.board{
+        if kingInCheckPosition == nil {
+            if isValidMove(from: from, to: cell.position, movingPiece: chessBoard.getPiece(at: from)!, board: chessBoard) {
+                validMovesList.append(cell.position)
+            }
+        }
+        else {
+            if isValidMove(from: from, to: cell.position, movingPiece: chessBoard.getPiece(at: from)!, board: chessBoard) && doesResolveCheck(from: from, to: cell.position, movingPiece: chessBoard.getPiece(at: from)!, board: chessBoard, whiteKingPosition: whiteKingPosition, blackKingPosition: blackKingPosition){
+                validMovesList.append(cell.position)
+            }
+        }
+    }
+    return validMovesList
 }

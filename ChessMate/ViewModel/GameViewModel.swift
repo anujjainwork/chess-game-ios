@@ -15,6 +15,8 @@ class GameViewModel: ObservableObject {
     @Published var currentPlayer: PlayerType = .white
     @Published var capturedPiecesWhite: [ChessPiece] = []
     @Published var capturedPiecesBlack: [ChessPiece] = []
+    @Published var isCheckMated: Bool = false
+    @Published var highlightValidMoves: [Position] = []
     
     var whiteKingPosition = Position(row: 7, column: 4)
     var blackKingPosition = Position(row: 0, column: 4)
@@ -46,6 +48,7 @@ class GameViewModel: ObservableObject {
         chessBoard.movePiece(from: from, to: to, moveHistory: &moveHistory)
         
         if isCheckMate(chessBoard: chessBoard, attackingPlayer: currentPlayer, whiteKingPosition: whiteKingPosition, blackKingPosition: blackKingPosition) {
+            isCheckMated = true
             print("checkmated")
         }
 
@@ -79,8 +82,10 @@ class GameViewModel: ObservableObject {
             if let selected = selectedPosition {
                 makeMove(from: selected, to: position)
                 selectedPosition = nil
+                highlightValidMoves = []
             } else {
                 selectedPosition = position
+                highlightValidMoves = getAllValidMovesToHighlight(at: position,chessBoard: chessBoard,kingInCheckPosition: kingInCheckPosition,whiteKingPosition: whiteKingPosition,blackKingPosition: blackKingPosition)
             }
         } else {
             print("Invalid selection: It's not \(currentPlayer)'s turn.")
