@@ -27,6 +27,10 @@ struct ChessPiece {
         case (.black, .pawn): return "♟"
         }
     }
+    
+    func copy() -> ChessPiece {
+            return ChessPiece(rank: self.rank, player: self.player)
+        }
 }
 
 enum Rank {
