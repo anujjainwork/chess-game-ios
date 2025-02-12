@@ -32,6 +32,12 @@ struct ChessBoard {
             board.append(BoardCell(position: Position(row: row, column: col), chessPiece: piece))
         }
     }
+    
+    func copy() -> ChessBoard {
+        var newBoard = ChessBoard()
+            newBoard.board = self.board.map { $0.copy() }
+            return newBoard
+        }
 
     func showBoard() {
         for row in 0..<8 {
@@ -78,5 +84,11 @@ struct ChessBoard {
         }
         return false
     }
+    
+    mutating func setPiece(at position: Position, piece: ChessPiece?) {
+            if let index = board.firstIndex(where: { $0.position == position }) {
+                board[index].chessPiece = piece
+            }
+        }
 
 }

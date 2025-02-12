@@ -10,6 +10,10 @@ import Foundation
 struct BoardCell {
     var position : Position
     var chessPiece : ChessPiece?
+    
+    func copy() -> BoardCell {
+            return BoardCell(position: self.position, chessPiece: self.chessPiece?.copy())
+        }
 }
 
 struct Position : Equatable {

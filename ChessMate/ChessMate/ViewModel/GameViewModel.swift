@@ -44,6 +44,10 @@ class GameViewModel: ObservableObject {
         moveHistory.addMove(move)
 
         chessBoard.movePiece(from: from, to: to, moveHistory: &moveHistory)
+        
+        if isCheckMate(chessBoard: chessBoard, attackingPlayer: currentPlayer, whiteKingPosition: whiteKingPosition, blackKingPosition: blackKingPosition) {
+            print("checkmated")
+        }
 
         // Update check status
         kingInCheckPosition = isKingInCheck(from: from, to: to, movingPiece: movingPiece, board: chessBoard, whiteKingPosition: whiteKingPosition, blackKingPosition: blackKingPosition)
