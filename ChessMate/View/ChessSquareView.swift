@@ -10,14 +10,13 @@ import SwiftUI
 struct ChessSquareView: View {
     let position: Position
     @ObservedObject var gameViewModel: GameViewModel
-
+    
     var body: some View {
         ZStack {
             Rectangle()
-                .fill((position.row + position.column) % 2 == 0 ? Color.white : Color.gray)
-                .overlay(highlightOverlay())  // Moved logic to a function
-                .frame(width: 50, height: 50)
-
+                .fill((position.row + position.column) % 2 == 0 ? Color(hex: "#DEE3C3") : Color(hex: "#166060"))
+                .overlay(highlightOverlay())
+                
             if let piece = gameViewModel.getPiece(at: position) {
                 Text(piece.displaySymbol)
                     .font(.largeTitle)
@@ -27,8 +26,7 @@ struct ChessSquareView: View {
             gameViewModel.selectPiece(at: position)
         }
     }
-
-    // Separate function for highlight overlay logic
+    
     @ViewBuilder
     private func highlightOverlay() -> some View {
         if gameViewModel.selectedPosition == position {
