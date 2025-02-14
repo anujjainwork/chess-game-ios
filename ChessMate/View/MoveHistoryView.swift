@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MoveHistoryView: View {
     
-    @ObservedObject var gameViewModel : GameViewModel
+    @ObservedObject var gameViewModel : ChessBoardViewModel
     
     var body: some View{
         VStack(alignment: .leading) {
@@ -29,7 +29,7 @@ struct MoveHistoryView: View {
 
 struct MoveHistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        MoveHistoryView(gameViewModel: GameViewModel())
+        MoveHistoryView(gameViewModel: ChessBoardViewModel())
     }
 }
 

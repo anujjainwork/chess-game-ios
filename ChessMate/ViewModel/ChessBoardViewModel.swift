@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GameViewModel: ObservableObject {
+class ChessBoardViewModel: ObservableObject {
     @Published var chessBoard = ChessBoard()
     @Published var moveHistory = MoveHistory()
     @Published var selectedPosition: Position?
