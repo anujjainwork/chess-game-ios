@@ -15,7 +15,7 @@ struct GameView: View {
             let boardSize = min(geometry.size.width, geometry.size.height) * 0.9
             
             ZStack {
-                LinearGradient(gradient: Gradient(colors: [Color(hex: "#041F1F"), Color(hex: "#0A2E2E")]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [Color.greenA, Color.greenB]), startPoint: .top, endPoint: .bottom)
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack(spacing: 20) {
@@ -24,7 +24,7 @@ struct GameView: View {
                         .shadow(radius: 5)
                     
                     RoundedRectangle(cornerRadius: 20)
-                        .fill(Color(hex: "#1C3636").opacity(0.95))
+                        .fill(Color.greenC)
                         .frame(width: boardSize, height: boardSize * 1.02)
                         .shadow(color: Color.black.opacity(0.4), radius: 10, x: 0, y: 4)
                         .overlay(

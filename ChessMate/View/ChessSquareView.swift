@@ -14,7 +14,7 @@ struct ChessSquareView: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .fill((position.row + position.column) % 2 == 0 ? Color(hex: "#DEE3C3") : Color(hex: "#166060"))
+                .fill((position.row + position.column) % 2 == 0 ? Color.lightCell : Color.darkCell)
                 .overlay(highlightOverlay())
                 
             if let piece = gameViewModel.getPiece(at: position) {
