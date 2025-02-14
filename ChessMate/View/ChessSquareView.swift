@@ -18,8 +18,9 @@ struct ChessSquareView: View {
                 .overlay(highlightOverlay())
                 
             if let piece = gameViewModel.getPiece(at: position) {
-                Text(piece.displaySymbol)
-                    .font(.largeTitle)
+                Image(piece.imageName)
+                    .resizable()
+                    .scaledToFit()
             }
         }
         .onTapGesture {

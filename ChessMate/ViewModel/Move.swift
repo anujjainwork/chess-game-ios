@@ -18,9 +18,9 @@ struct Move {
         var toString : String = "\(to.column.toChessColumn)\(8 - to.row)"
         
             if let capturedPiece = capturedPiece {
-                return "\(movedPiece.displaySymbol)\(fromString)x\(toString)"
+                return "\(movedPiece.imageName)\(fromString)x\(toString)"
             } else {
-                return "\(movedPiece.displaySymbol)\(fromString)-\(toString)"
+                return "\(movedPiece.imageName)\(fromString)-\(toString)"
             }
     }
     

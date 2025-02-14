@@ -1,12 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "bishop_white.svg",
+      "filename" : "queen_white.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "bishop_black.svg",
       "idiom" : "universal",
       "scale" : "2x"
     },

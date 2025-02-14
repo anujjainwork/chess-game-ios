@@ -7,31 +7,30 @@
 
 import Foundation
 
-struct ChessPiece {
+import Foundation
+
+struct ChessPiece: Identifiable {
+    var id = UUID()
     var rank: Rank
     var player: PlayerType
 
-    var displaySymbol: String {
-        switch (player, rank) {
-        case (.white, .king): return "♔"
-        case (.white, .queen): return "♕"
-        case (.white, .rook): return "♖"
-        case (.white, .bishop): return "♗"
-        case (.white, .knight): return "♘"
-        case (.white, .pawn): return "♙"
-        case (.black, .king): return "♚"
-        case (.black, .queen): return "♛"
-        case (.black, .rook): return "♜"
-        case (.black, .bishop): return "♝"
-        case (.black, .knight): return "♞"
-        case (.black, .pawn): return "♟"
+    var imageName: String {
+        let prefix = player == .white ? "white" : "black"
+        switch rank {
+        case .king: return "king_\(prefix)"
+        case .queen: return "queen_\(prefix)"
+        case .rook: return "rook_\(prefix)"
+        case .bishop: return "bishop_\(prefix)"
+        case .knight: return "knight_\(prefix)"
+        case .pawn: return "pawn_\(prefix)"
         }
     }
-    
+
     func copy() -> ChessPiece {
-            return ChessPiece(rank: self.rank, player: self.player)
-        }
+        return ChessPiece(rank: self.rank, player: self.player)
+    }
 }
+
 
 enum Rank {
     case king, queen, bishop, knight, rook, pawn
