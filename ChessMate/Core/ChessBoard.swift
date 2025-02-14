@@ -39,25 +39,25 @@ struct ChessBoard {
             return newBoard
         }
 
-    func showBoard() {
-        for row in 0..<8 {
-            print("\(8 - row) ", terminator: "")
-            
-            for col in 0..<8 {
-                let index = row * 8 + col
-                let cell = board[index]
-                
-                if let piece = cell.chessPiece {
-                    let symbol = piece.player == .white ? piece.displaySymbol : piece.displaySymbol.lowercased()
-                    print(symbol, terminator: " ")
-                } else {
-                    print(".", terminator: " ")
-                }
-            }
-            print()
-        }
-        print("  A B C D E F G H")
-    }
+//    func showBoard() {
+//        for row in 0..<8 {
+//            print("\(8 - row) ", terminator: "")
+//            
+//            for col in 0..<8 {
+//                let index = row * 8 + col
+//                let cell = board[index]
+//                
+//                if let piece = cell.chessPiece {
+//                    let symbol = piece.player == .white ? 
+//                    print(symbol, terminator: " ")
+//                } else {
+//                    print(".", terminator: " ")
+//                }
+//            }
+//            print()
+//        }
+//        print("  A B C D E F G H")
+//    }
     
     func getPiece(at position: Position) -> ChessPiece? {
         let index = position.row * 8 + position.column

@@ -1,12 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "queen_white.svg",
+      "filename" : "rook_white.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "queen_black.svg",
       "idiom" : "universal",
       "scale" : "2x"
     },
