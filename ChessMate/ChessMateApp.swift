@@ -11,7 +11,7 @@ import SwiftUI
 struct ChessMateApp: App {
     var body: some Scene {
         WindowGroup {
-            GameView(gameViewModel: GameViewModel())
+            GameView(gameViewModel: ChessBoardViewModel())
         }
     }
 }
