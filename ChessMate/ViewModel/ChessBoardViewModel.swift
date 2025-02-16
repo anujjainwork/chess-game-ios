@@ -9,7 +9,7 @@ import Foundation
 
 class ChessBoardViewModel: ObservableObject {
     @Published var chessBoard = ChessBoard()
-    @Published var moveHistory = MoveHistory()
+    @Published var moveHistory: MoveHistoryViewModel
     @Published var selectedPosition: Position?
     @Published var kingInCheckPosition: Position?
     @Published var currentPlayer: PlayerType = .white
@@ -20,6 +20,10 @@ class ChessBoardViewModel: ObservableObject {
     
     var whiteKingPosition = Position(row: 7, column: 4)
     var blackKingPosition = Position(row: 0, column: 4)
+    
+    init(moveHistory: MoveHistoryViewModel) {
+            self.moveHistory = moveHistory
+        }
 
     /// Attempts to make a move from `from` position to `to` position.
     func makeMove(from: Position, to: Position) {
@@ -43,9 +47,10 @@ class ChessBoardViewModel: ObservableObject {
         updateKingPosition(movingPiece: movingPiece, to: to)
 
         let move = Move(movedPiece: movingPiece, capturedPiece: chessBoard.getPiece(at: to), from: from, to: to)
-        moveHistory.addMove(move)
-
-        chessBoard.movePiece(from: from, to: to, moveHistory: &moveHistory)
+        
+        moveHistory.saveToUndoStack(chessBoard: chessBoard)
+        
+        chessBoard.movePiece(from: from, to: to)
         
         if isCheckMate(chessBoard: chessBoard, attackingPlayer: currentPlayer, whiteKingPosition: whiteKingPosition, blackKingPosition: blackKingPosition) {
             isCheckMated = true
@@ -97,10 +102,10 @@ class ChessBoardViewModel: ObservableObject {
         return chessBoard.getPiece(at: position)
     }
 
-    /// Returns a formatted move history.
-    func getMoveHistory() -> [String] {
-        return moveHistory.getAllMoves().map { $0.description() }
-    }
+//    /// Returns a formatted move history.
+//    func getMoveHistory() -> [String] {
+//        return moveHistory.getAllMoves().map { $0.description() }
+//    }
 
     /// Adds captured pieces to the corresponding list.
     private func addCapturedPiece(at position: Position) {

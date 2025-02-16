@@ -12,8 +12,9 @@ struct BoardCell {
     var chessPiece : ChessPiece?
     
     func copy() -> BoardCell {
-            return BoardCell(position: self.position, chessPiece: self.chessPiece?.copy())
-        }
+        return BoardCell(position: self.position, chessPiece: self.chessPiece?.copy())
+    }
+
 }
 
 struct Position : Equatable {

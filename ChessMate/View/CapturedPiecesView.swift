@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CapturedPiecesView: View {
-    @ObservedObject var chessBoardViewModel: ChessBoardViewModel
+    @EnvironmentObject var chessBoardViewModel: ChessBoardViewModel
     var whiteCapturedPieces: Bool
 
     var body: some View {
@@ -59,6 +59,6 @@ struct CapturedPiecesView: View {
     }
 }
 
-#Preview {
-    CapturedPiecesView(chessBoardViewModel: ChessBoardViewModel(), whiteCapturedPieces: false)
-}
+//#Preview {
+//    CapturedPiecesView(chessBoardViewModel: ChessBoardViewModel(moveHistory: ), whiteCapturedPieces: false)
+//}

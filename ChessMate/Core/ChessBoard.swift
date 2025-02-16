@@ -35,9 +35,12 @@ struct ChessBoard {
     
     func copy() -> ChessBoard {
         var newBoard = ChessBoard()
-            newBoard.board = self.board.map { $0.copy() }
-            return newBoard
-        }
+        newBoard.board = self.board.map { $0.copy() }
+        print("📋 Copied board with \(newBoard.board.count) pieces") // Debugging line
+        return newBoard
+    }
+
+
 
 //    func showBoard() {
 //        for row in 0..<8 {
@@ -64,7 +67,7 @@ struct ChessBoard {
         return board[index].chessPiece
     }
     
-    mutating func movePiece(from: Position, to: Position, moveHistory: inout MoveHistory) -> Bool{
+    mutating func movePiece(from: Position, to: Position) -> Bool{
         let fromIndex = from.row * 8 +  from.column
         let toIndex = to.row * 8 + to.column
         
@@ -74,9 +77,7 @@ struct ChessBoard {
         
         let capturedPiece = board[toIndex].chessPiece
         let move = Move(movedPiece: movingPiece, capturedPiece: capturedPiece, from: from, to: to)
-            
-        moveHistory.addMove(move)
-        
+                    
         if isValidMove(from: from, to: to, movingPiece: movingPiece, board: self){
             board[toIndex].chessPiece = movingPiece
             board[fromIndex].chessPiece = nil

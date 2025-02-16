@@ -14,10 +14,10 @@ struct Move {
     var to : Position
     
     func description() -> String {
-        var fromString : String = "\(from.column.toChessColumn)\(8 - from.row)"
-        var toString : String = "\(to.column.toChessColumn)\(8 - to.row)"
+        let fromString : String = "\(from.column.toChessColumn)\(8 - from.row)"
+        let toString : String = "\(to.column.toChessColumn)\(8 - to.row)"
         
-            if let capturedPiece = capturedPiece {
+        if capturedPiece != nil {
                 return "\(movedPiece.imageName)\(fromString)x\(toString)"
             } else {
                 return "\(movedPiece.imageName)\(fromString)-\(toString)"
