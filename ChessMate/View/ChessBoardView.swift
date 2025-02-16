@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChessBoardView: View {
-    @ObservedObject var gameViewModel: ChessBoardViewModel
+    @EnvironmentObject var moveHistoryVM: MoveHistoryViewModel
     
     var body: some View {
         GeometryReader { geometry in
@@ -27,17 +27,32 @@ struct ChessBoardView: View {
                     }
                     
                     // Chess Board
+                    if moveHistoryVM.backToMainGame {
                     VStack(spacing: 0) {
                         ForEach(0..<8, id: \ .self) { row in
                             HStack(spacing: 0) {
                                 ForEach(0..<8, id: \ .self) { col in
-                                    ChessSquareView(position: Position(row: row, column: col),
-                                                    gameViewModel: gameViewModel)
-                                        .frame(width: squareSize, height: squareSize)
+                                        ChessSquareView(position: Position(row: row, column: col))
+                                            .frame(width: squareSize, height: squareSize)
+                                            .transition(.opacity)
+                                    }
                                 }
                             }
                         }
                     }
+                    else {
+                        VStack(spacing: 0) {
+                            ForEach(0..<8, id: \ .self) { row in
+                                HStack(spacing: 0) {
+                                    ForEach(0..<8, id: \ .self) { col in
+                                        HistorySquareView(position: Position(row: row, column: col))
+                                            .frame(width: squareSize, height: squareSize)
+                                            .transition(.opacity)
+                                        }
+                                    }
+                                }
+                            }
+                   }
                 }
                 
                 // File Labels (A-H) at the Bottom

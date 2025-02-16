@@ -8,28 +8,25 @@
 import SwiftUI
 
 struct MoveHistoryView: View {
-    
-    @ObservedObject var gameViewModel : ChessBoardViewModel
-    
-    var body: some View{
-        VStack(alignment: .leading) {
-                    Text("Move History")
-                        .font(.headline)
-                        .padding(.bottom, 5)
-                    
-                    List(gameViewModel.getMoveHistory(), id: \.self) { move in
-                        Text(move)
-                            .font(.body)
-                    }
-                }
-                .padding()
+    @EnvironmentObject var moveHistoryVM: MoveHistoryViewModel
+
+    var body: some View {
+        HStack {
+            Button(action: {
+                moveHistoryVM.undoMove()
+            }) {
+                Image("back-button")
+                    .opacity(moveHistoryVM.undoEnabled ? 1.0 : 0.5)
+            }
+            .disabled(!moveHistoryVM.undoEnabled)
+
+            Button(action: {
+                moveHistoryVM.redoMove()
+            }) {
+                Image("forward-button")
+                    .opacity(moveHistoryVM.redoEnabled ? 1.0 : 0.5)
+            }
+            .disabled(!moveHistoryVM.redoEnabled)
+        }
     }
 }
-
-
-struct MoveHistoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        MoveHistoryView(gameViewModel: ChessBoardViewModel())
-    }
-}
-

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ChessSquareView: View {
     let position: Position
-    @ObservedObject var gameViewModel: ChessBoardViewModel
+    @EnvironmentObject var gameViewModel: ChessBoardViewModel
     
     var body: some View {
         ZStack {

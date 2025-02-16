@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct GameView: View {
-    @ObservedObject var gameViewModel: ChessBoardViewModel
     
     var body: some View {
         GeometryReader { geometry in
@@ -19,7 +18,8 @@ struct GameView: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack(spacing: 20) {
-                    CapturedPiecesView(chessBoardViewModel: gameViewModel, whiteCapturedPieces: false)
+                    MoveHistoryView()
+                    CapturedPiecesView(whiteCapturedPieces: false)
                         .frame(height: max(40, 60))
                         .shadow(radius: 5)
                     
@@ -28,14 +28,15 @@ struct GameView: View {
                         .frame(width: boardSize, height: boardSize * 1.02)
                         .shadow(color: Color.black.opacity(0.4), radius: 10, x: 0, y: 4)
                         .overlay(
-                            ChessBoardView(gameViewModel: gameViewModel)
+                            ChessBoardView()
                                 .frame(width: boardSize * 0.96, height: boardSize * 0.99)
                                 .offset(x: -5, y: 10)
                         )
                         
-                    CapturedPiecesView(chessBoardViewModel: gameViewModel, whiteCapturedPieces: true)
+                    CapturedPiecesView(whiteCapturedPieces: true)
                         .frame(height: max(40, 60))
                         .shadow(radius: 5)
+                    MoveHistoryView()
                 }
             }
             .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
@@ -43,7 +44,7 @@ struct GameView: View {
     }
 }
 
-// MARK: - Preview
-#Preview {
-    GameView(gameViewModel: ChessBoardViewModel())
-}
+//// MARK: - Preview
+//#Preview {
+//    GameView(gameViewModel: ChessBoardViewModel(), moveHistoryVM: MoveHistoryViewModel())
+//}
