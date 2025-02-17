@@ -11,18 +11,26 @@ import SwiftUI
 struct ChessMateApp: App {
     @StateObject var moveHistoryVM = MoveHistoryViewModel()
     @StateObject var chessBoardVM: ChessBoardViewModel
+    @StateObject var gameStatusVM = GameStatusViewModel()
+    @StateObject var timerVM: TimerViewModel
 
     init() {
         let moveHistory = MoveHistoryViewModel()
-        let gameVM = ChessBoardViewModel(moveHistory: moveHistory)
+        let gameStatusVM = GameStatusViewModel()
+        let timerVM = TimerViewModel(gameStatusVM: gameStatusVM)
+        let chessBoardVM = ChessBoardViewModel(moveHistory: moveHistory,timerVM: timerVM)
         
         _moveHistoryVM = StateObject(wrappedValue: moveHistory)
-        _chessBoardVM = StateObject(wrappedValue: gameVM)
+        _chessBoardVM = StateObject(wrappedValue: chessBoardVM)
+        _gameStatusVM = StateObject(wrappedValue: gameStatusVM)
+        _timerVM = StateObject(wrappedValue: timerVM)
     }
 
     var body: some Scene {
         WindowGroup {
-            GameView()
+            HomeView()
+                .environmentObject(gameStatusVM)
+                .environmentObject(timerVM)
                 .environmentObject(moveHistoryVM)
                 .environmentObject(chessBoardVM)
         }
