@@ -32,19 +32,3 @@ struct ChessPiece: Identifiable {
 
 }
 
-
-enum Rank {
-    case king, queen, bishop, knight, rook, pawn
-}
-
-enum PlayerType {
-    case white, black
-
-    var displayName: String {
-        switch self {
-        case .white: return "White"
-        case .black: return "Black"
-        }
-    }
-}
-

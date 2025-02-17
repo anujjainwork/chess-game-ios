@@ -10,6 +10,7 @@ import Foundation
 class ChessBoardViewModel: ObservableObject {
     @Published var chessBoard = ChessBoard()
     @Published var moveHistory: MoveHistoryViewModel
+    @Published var timerVM : TimerViewModel
     @Published var selectedPosition: Position?
     @Published var kingInCheckPosition: Position?
     @Published var currentPlayer: PlayerType = .white
@@ -21,9 +22,12 @@ class ChessBoardViewModel: ObservableObject {
     var whiteKingPosition = Position(row: 7, column: 4)
     var blackKingPosition = Position(row: 0, column: 4)
     
-    init(moveHistory: MoveHistoryViewModel) {
-            self.moveHistory = moveHistory
-        }
+    init(moveHistory: MoveHistoryViewModel, timerVM: TimerViewModel) {
+        self.moveHistory = moveHistory
+        self.timerVM = timerVM
+        
+        timerVM.startTimer()
+    }
 
     /// Attempts to make a move from `from` position to `to` position.
     func makeMove(from: Position, to: Position) {
@@ -61,6 +65,8 @@ class ChessBoardViewModel: ObservableObject {
         kingInCheckPosition = isKingInCheck(from: from, to: to, movingPiece: movingPiece, board: chessBoard, whiteKingPosition: whiteKingPosition, blackKingPosition: blackKingPosition)
 
         togglePlayerTurn()
+        timerVM.switchTurn()
+        timerVM.startTimer()
     }
 
     /// Updates the king’s position if moved.
