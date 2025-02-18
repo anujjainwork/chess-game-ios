@@ -10,11 +10,11 @@ import Foundation
 class GameStatusViewModel : ObservableObject {
     @Published var gameStatus : GameStatus = GameStatus.initial
     
-    func chooseGameMode(choosedGameMode:GameMode) {
+    func chooseGameMode(choosedGameMode: GameMode) {
         gameStatus = GameStatus.playing(gameMode: choosedGameMode)
     }
     
-    func updateGameStatusToWin(winner:PlayerType){
+    func updateGameStatusToWin(winner: PlayerType) {
         let newGameStatus = GameStatus.win(whoWon: winner)
         gameStatus = newGameStatus
     }

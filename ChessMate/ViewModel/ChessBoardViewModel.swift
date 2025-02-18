@@ -50,7 +50,7 @@ class ChessBoardViewModel: ObservableObject {
         addCapturedPiece(at: to)
         updateKingPosition(movingPiece: movingPiece, to: to)
 
-        let move = Move(movedPiece: movingPiece, capturedPiece: chessBoard.getPiece(at: to), from: from, to: to)
+        _ = Move(movedPiece: movingPiece, capturedPiece: chessBoard.getPiece(at: to), from: from, to: to)
         
         moveHistory.saveToUndoStack(chessBoard: chessBoard)
         
