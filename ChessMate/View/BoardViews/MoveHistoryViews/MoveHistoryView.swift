@@ -20,7 +20,7 @@ struct MoveHistoryView: View {
                 Image("back-button")
                     .opacity(moveHistoryVM.undoEnabled && (player == chessBoardVM.currentPlayer) ? 1.0 : 0.5)
             }
-            .disabled(!moveHistoryVM.undoEnabled && (player != chessBoardVM.currentPlayer))
+            .disabled(!moveHistoryVM.undoEnabled || (player != chessBoardVM.currentPlayer))
 
             Button(action: {
                 moveHistoryVM.redoMove()
@@ -28,7 +28,7 @@ struct MoveHistoryView: View {
                 Image("forward-button")
                     .opacity(moveHistoryVM.redoEnabled && (player == chessBoardVM.currentPlayer) ? 1.0 : 0.5)
             }
-            .disabled(!moveHistoryVM.redoEnabled && (player != chessBoardVM.currentPlayer))
+            .disabled(!moveHistoryVM.redoEnabled || (player != chessBoardVM.currentPlayer))
         }
     }
 }

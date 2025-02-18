@@ -8,7 +8,7 @@
 import Foundation
 
 func isValidMove(from: Position, to: Position, movingPiece: ChessPiece, board: ChessBoard) -> Bool {
-    let fromIndex = from.row * 8 + from.column
+    _ = from.row * 8 + from.column
     let toIndex = to.row * 8 + to.column
     
     // Prevent moving onto a piece of the same player
@@ -37,7 +37,7 @@ func isValidMove(from: Position, to: Position, movingPiece: ChessPiece, board: C
 private func isValidForPawn(from: Position, to: Position, movingPiece: ChessPiece, board: ChessBoard) -> Bool {
     let isWhite = movingPiece.player == .white
     let direction = isWhite ? -1 : 1
-    let fromIndex = from.row * 8 + from.column
+    _ = from.row * 8 + from.column
     let toIndex = to.row * 8 + to.column
 
     // Forward move

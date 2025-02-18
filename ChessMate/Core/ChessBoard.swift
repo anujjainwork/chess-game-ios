@@ -76,7 +76,7 @@ struct ChessBoard {
         }
         
         let capturedPiece = board[toIndex].chessPiece
-        let move = Move(movedPiece: movingPiece, capturedPiece: capturedPiece, from: from, to: to)
+        _ = Move(movedPiece: movingPiece, capturedPiece: capturedPiece, from: from, to: to)
                     
         if isValidMove(from: from, to: to, movingPiece: movingPiece, board: self){
             board[toIndex].chessPiece = movingPiece

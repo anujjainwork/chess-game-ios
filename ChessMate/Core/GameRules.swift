@@ -26,7 +26,7 @@ func doesResolveCheck(from: Position, to: Position, movingPiece: ChessPiece, boa
     let backupFromPiece = tempBoard.getPiece(at: from)
     let backupToPiece = tempBoard.getPiece(at: to)
     
-    var currentKingPosition = (movingPiece.player == .white) ? whiteKingPosition : blackKingPosition
+    let currentKingPosition = (movingPiece.player == .white) ? whiteKingPosition : blackKingPosition
     var updatedKingPosition = currentKingPosition
 
     tempBoard.setPiece(at: from, piece: nil)

@@ -50,7 +50,7 @@ class MoveHistoryViewModel: ObservableObject {
     }
 
     private func updateButtons() {
-        undoEnabled = undoStack.count > 1 // Prevent undo if only the initial board remains
+        undoEnabled = undoStack.count > 1
         redoEnabled = !redoStack.isEmpty
         backToMainGame = redoStack.isEmpty
     }
